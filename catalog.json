@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["kg", "stable"],
+  "properties": {
+    "kg":     { "type": "number", "minimum": 0, "maximum": 300 },
+    "stable": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

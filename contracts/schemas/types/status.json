@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "status",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "online": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["online", "offline", "degraded"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["deviceId", "online", "timestamp"],
+  "additionalProperties": true
+}

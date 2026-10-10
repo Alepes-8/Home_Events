@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "soil.moisture",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "unit": {
+      "type": "string",
+      "enum": ["%", "raw"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["deviceId", "value", "unit", "timestamp"],
+  "additionalProperties": true
+}

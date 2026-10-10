@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "motion.cleared",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "detected": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "required": ["deviceId", "timestamp", "detected"],
+  "additionalProperties": true
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "envelope",
+  "type": "object",
+  "required": ["id", "schemaVersion", "deviceId", "type", "ts", "seq", "data"],
+  "properties": {
+    "id":            { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "deviceId":      { "type": "string", "pattern": "^[a-z]+-[0-9a-f]{6}$" },
+    "type":          { "type": "string", "pattern": "^[a-z]+(\\.[a-z_]+)*$" },
+    "ts":            { "type": "integer", "minimum": 0 },
+    "seq":           { "type": "integer", "minimum": 0 },
+    "buffered":      { "type": "boolean" },
+    "data":          { "type": "object" },
+
+    "correlationId": { "type": "string", "minLength": 1 },
+    "source":        { "type": "string", "minLength": 1 },
+    "expiresAt":     { "type": "integer", "minimum": 0 },
+    "result":        { "type": "string", "enum": ["ok", "rejected", "expired"] }
+  },
+  "additionalProperties": false
+}

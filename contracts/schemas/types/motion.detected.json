@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "motion.detected",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "detected": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": ["deviceId", "timestamp", "detected"],
+  "additionalProperties": true
+}
