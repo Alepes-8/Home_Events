@@ -1,0 +1,14 @@
+{
+  "name": "home_events",
+  "version": "1.0.0",
+  "description": "With the different events a home system can have, the Home_Events repo handles the rules and establishments of event drivent communcaiton between units in the home. On the side of the nginx. All in order to allow and manage events and data logs from sensors and different electronics.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "workspaces": ["contracts", "packages/*", "services/*"]
+}

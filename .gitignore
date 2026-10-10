@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Node / npm workspace artifacts
+node_modules/
+.npm/
+.pnpm-store/
+
+# Local environment files
+.env
+.env.*
+
+# Lockfile exceptions: keep root lockfiles, ignore package-lock in workspaces if desired
+# package-lock.json
+
+# Optional: ignore workspace-generated build output
+/dist/
+/build/
+/coverage/
+
