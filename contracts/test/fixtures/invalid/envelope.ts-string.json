@@ -1,0 +1,9 @@
+{
+  "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W",
+  "schemaVersion": 1,
+  "deviceId": "button-a3f2c1",
+  "type": "button.pressed",
+  "ts": "2026-10-11T12:00:00Z",
+  "seq": 2,
+  "data": { "press": "single" }
+}

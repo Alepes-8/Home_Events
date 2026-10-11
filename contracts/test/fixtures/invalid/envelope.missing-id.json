@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "deviceId": "button-a3f2c1",
+  "type": "button.pressed",
+  "ts": 1760180400000,
+  "seq": 2,
+  "data": { "press": "single" }
+}
