@@ -8,15 +8,38 @@ The home event system is made up of different components that each have differen
 
 Here, it is not specifically about the components the system currently contains, such as a sensor, but rather the general whole of the components needed for the system to function.
 
-- Recorder
-- Device
-- Rule engine
-- Device registry
-- Future subscribers
-- MQTT
-- Mosquitto 2
-
+- services 
+    - Includes the server side code  and this is the services that it contains.
+        - Recorder
+        - Rule engine
+        - simulator
+            - creates fake devices to send real formated messages, good for testing without real hardware.
+        - registry
+- firmware
+- packages/bus-client
+    - setup a core code structure for each service to utilise without needing to rewrite it over and over again for each service.
+- Infra
+    - the confirguration set for the server side. It isn't the servers code, the configurations such as userlist, mosquitto config, and acl. docker compose files and helpter scripts is also included here. The server-side code is services/. In short: services is what runs, and infra is how it runs.
+- contract
+    - single source of truth, establish the base on how the structure of messages should be setup. This included the types and the packages information, id, deviceId and more.
+    - envelope.shema.json structure read can be found on [link][https://qaskills.sh/blog/api-testing-json-schema-validation-guide]
+    - catalog
+        - WHO may send WHAT: type → class → allowed device types
 ---
+
+## Contract 
+
+### Catalog
+
+The catalog is a file destingushing what each devise type can send and use as messages, meanining we can't allow a soil unit to send a button action. The type is in the device’s id, and the device can’t lie about its id. Then of course there are possibilites that a soil sensor sends a specific action which results in a light turning on, even if the orginal message wasn't light sensors but rather moistor sensor. It all depned on how it is utilised later on.
+
+1. The id contains the type. soil-a3f2c1 starts with soil.
+2. The id is in the topic. It publishes to home/v1/device/soil-a3f2c1/event.
+3. Mosquitto’s ACL enforces it. The device logs in as user soil-a3f2c1 and may only publish to its own topics. It can’t pretend to be button-xxxx.
+
+So validation reads soil from the topic and looks up button.pressed in the catalog. Allowed devices: button only. Result: rejected.
+
+The registry isn’t involved. That’s deliberate: every service can validate on its own, instantly, without asking another service. The registry is for where a device is and whether it’s online, not for permission.
 
 ## Message types
 

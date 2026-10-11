@@ -46,7 +46,7 @@ home/v1/device/{deviceId}/{class}
 | Field           | Type     | Required | Notes |
 |-----------------|----------|----------|-------|
 | `id`            | ULID     | yes      | Unique per message, used to drop duplicates (QoS 1 = at-least-once) |
-| `schemaVersion` | int      | yes      | Starts at 1 |
+| `schemaVersion` | int      | yes      | Starts at 1, we suport current version and current version - 1 |
 | `deviceId`      | string   | yes      | Must match the topic's `{deviceId}` |
 | `type`          | string   | yes      | e.g. `soil.moisture`, `light.set`; must belong to the topic's class |
 | `ts`            | epoch ms | yes      | When it happened, on the device clock |
