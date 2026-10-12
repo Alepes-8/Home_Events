@@ -1,0 +1,39 @@
+{
+  "groups": {
+    "all":          ["button", "light", "motion", "soil", "weight"],
+    "configurable": ["motion", "soil", "weight"]
+  },
+  "classes": {
+    "meta":      { "qos": 1, "retained": true },
+    "status":    { "qos": 1, "retained": true },
+    "telemetry": { "qos": 0, "retained": false },
+    "event":     { "qos": 1, "retained": false },
+    "state":     { "qos": 1, "retained": true },
+    "cmd":       { "qos": 1, "retained": false },
+    "ack":       { "qos": 1, "retained": false }
+  },
+  "types": {
+    "meta":             { "class": "meta",      "deviceTypes": "all",          "schema": "types/meta.json" },
+
+    "status":           { "class": "status",    "deviceTypes": "all",          "schema": "types/status.json" },
+
+    "soil.moisture":    { "class": "telemetry", "deviceTypes": ["soil"],       "schema": "types/soil.moisture.json" },
+
+    "button.pressed":   { "class": "event",     "deviceTypes": ["button"],     "schema": "types/button.pressed.json" },
+    "motion.cleared":   { "class": "event",     "deviceTypes": ["motion"],     "schema": "types/motion.cleared.json" },
+    "motion.detected":  { "class": "event",     "deviceTypes": ["motion"],     "schema": "types/motion.detected.json" },
+    "weight.measured":  { "class": "event",     "deviceTypes": ["weight"],     "schema": "types/weight.measured.json" },
+
+    "light":            { "class": "state",     "deviceTypes": ["light"],      "schema": "types/light.json" },
+
+    "config.set":       { "class": "cmd",       "deviceTypes": "configurable", "schema": "types/config.set.json" },
+    "device.identify":  { "class": "cmd",       "deviceTypes": "all",          "schema": "types/device.identify.json" },
+    "device.reboot":    { "class": "cmd",       "deviceTypes": "all",          "schema": "types/device.reboot.json" },
+    "light.set":        { "class": "cmd",       "deviceTypes": ["light"],      "schema": "types/light.set.json" },
+    "soil.calibrate":   { "class": "cmd",       "deviceTypes": ["soil"],       "schema": "types/soil.calibrate.json" },
+    "weight.calibrate": { "class": "cmd",       "deviceTypes": ["weight"],     "schema": "types/weight.calibrate.json" },
+    "weight.tare":      { "class": "cmd",       "deviceTypes": ["weight"],     "schema": "types/weight.tare.json" },
+
+    "ack":              { "class": "ack",       "deviceTypes": "all",          "schema": "types/ack.json" }
+  }
+}
