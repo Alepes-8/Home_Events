@@ -1,19 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "device.identify",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "device.identify",
   "type": "object",
-  "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "requestId": {
-      "type": "string"
-    }
-  },
-  "required": ["deviceId", "timestamp"],
-  "additionalProperties": true
+  "required": [],
+  "properties": { "durationSec": { "type": "integer", "minimum": 1, "maximum": 60 } },
+  "additionalProperties": false
 }

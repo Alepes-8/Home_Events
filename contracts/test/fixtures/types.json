@@ -1,0 +1,74 @@
+{
+    "ack": {
+        "valid":   [ {}, {"reason": "unsupported setting: holdSec"} ],
+        "invalid": [ {"reason": 123}, {"reason": ""}, {"code": "X"} ]
+    },
+    "button.pressed": {
+        "valid":   [ { "press": "single" } ],
+        "invalid": [ {}, { "press": "triple" } ]
+    },
+    "config.set":{
+        "valid":   [ {"intervalSec": 12300, "holdSec": 5}, {"intervalSec": 60}, {"holdSec": 30} ],
+        "invalid": [ {}, {"intervalSec": -123, "holdSec": 12}, {"intervalSec": 123, "holdSec": 0},
+                    {"intervalSec": 123, "holdSec": 3601}, {"intervalSec": 86401, "holdSec": 5} ]
+    },
+    "device.identify": {
+        "valid":   [ {"durationSec": 10}, {}],
+        "invalid": [ {"durationSec": 0}, {"durationSec": 61} ]
+    },
+    "device.reboot": {
+        "valid":   [ {} ] , 
+        "invalid": [ {"delay": 5} ]
+    },
+    "light": {
+        "valid":   [ {"on": true, "brightness": 40}, {"on": false} ],
+        "invalid": [ {}, {"brightness": 50}, {"on": "yes"}, {"on": true, "brightness": 140},  { "on": true, "color": "red" } ]
+    },
+    "light.set": {
+        "valid":   [ { "on": true }, { "on": false, "brightness": 40 } ],
+        "invalid": [ {}, { "on": "yes" }, { "on": true, "brightness": 140 }, { "on": true, "color": "red" } ]
+    },
+    "meta": {
+        "valid": [
+            { "firmwareVersion": "0.1.0", "capabilities": [ {"name": "moisture", "kind": "sensor", "unit": "%"} ] }
+        ],
+        "invalid": [
+            {},
+            { "firmwareVersion": "v1", "capabilities": [ {"name": "moisture", "kind": "sensor"} ] },
+            { "firmwareVersion": "0.1.0", "capabilities": [] },
+            { "firmwareVersion": "0.1.0", "capabilities": [ {"name": "moisture", "kind": "gadget"} ] }
+        ]
+    },
+    "motion.cleared": {
+        "valid":   [ {}, {"durationSec": 10} ],
+        "invalid": [ {"durationSec": -1}, {"durationSec": 1.5} ]
+    },
+    "motion.detected": {
+        "valid":   [ {} ],
+        "invalid": [ {"detected": true} ]
+    },
+    "soil.calibrate": {
+        "valid":   [ {"point": "dry"}, {"point": "wet"} ],
+        "invalid": [ {}, {"point": "wetness"}, {"point": 123} ]
+    },
+    "soil.moisture": {
+        "valid":   [ {"raw": 123, "percent": 10} ],
+        "invalid": [ {}, {"raw": -1, "percent": 10}, {"raw": 123}, {"percent": 10}, {"raw": 4096, "percent": 10}, {"raw": 10, "percent": 101} , {"raw": 123, "percent": -1}]
+    },
+    "status": {
+        "valid":   [ {"state": "online"}, {"state": "offline"} ],
+        "invalid": [ {}, {"state": "unknown"}, {"state": 123} ]
+    },
+    "weight.calibrate": {
+        "valid":   [ {"knownKg": 5.5}, {"knownKg": 200} ],
+        "invalid": [ {}, {"knownKg": 0}, {"knownKg": -0.1}, {"knownKg": 200.1}, {"knownKg": "5.5"} ]
+    },
+    "weight.measured": {
+        "valid":   [ {"kg": 142, "stable": true}, {"kg": 0, "stable": false} ],
+        "invalid": [ {}, {"kg": 1}, {"stable": true}, {"kg": -1, "stable": true}, {"kg": 201, "stable": true}, {"kg": 142, "stable": "fail"} ]
+    },
+    "weight.tare": {
+        "valid":   [ {} ], 
+        "invalid": [ {"weight": 0} ]
+    }
+}

@@ -1,25 +1,11 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "soil.moisture",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "soil.moisture",
   "type": "object",
+  "required": ["raw", "percent"],
   "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "value": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 100
-    },
-    "unit": {
-      "type": "string",
-      "enum": ["%", "raw"]
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "raw":     { "type": "integer", "minimum": 0, "maximum": 4095 },
+    "percent": { "type": "number",  "minimum": 0, "maximum": 100 }
   },
-  "required": ["deviceId", "value", "unit", "timestamp"],
-  "additionalProperties": true
+  "additionalProperties": false
 }

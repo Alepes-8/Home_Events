@@ -1,25 +1,11 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "light",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "light",
   "type": "object",
+  "required": ["on"],
   "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "state": {
-      "type": "string",
-      "enum": ["on", "off"]
-    },
-    "brightness": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 100
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "on":         { "type": "boolean" },
+    "brightness": { "type": "integer", "minimum": 0, "maximum": 100 }
   },
-  "required": ["deviceId", "state", "timestamp"],
-  "additionalProperties": true
+  "additionalProperties": false
 }

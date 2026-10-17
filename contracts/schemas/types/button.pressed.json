@@ -1,20 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "button.pressed",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "button.pressed",
   "type": "object",
-  "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "pressed": {
-      "type": "boolean",
-      "const": true
-    }
-  },
-  "required": ["deviceId", "timestamp", "pressed"],
-  "additionalProperties": true
+  "required": ["press"],
+  "properties": { "press": { "type": "string", "enum": ["single", "double", "long"] } },
+  "additionalProperties": false
 }

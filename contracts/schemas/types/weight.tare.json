@@ -1,19 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "weight.tare",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "weight.tare",
   "type": "object",
-  "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "correlationId": {
-      "type": "string"
-    }
-  },
-  "required": ["deviceId", "timestamp"],
-  "additionalProperties": true
+  "required":[],
+  "properties": {},
+  "additionalProperties": false
 }

@@ -1,22 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ack",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ack",
   "type": "object",
-  "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "correlationId": {
-      "type": "string"
-    },
-    "accepted": {
-      "type": "boolean"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
-  },
-  "required": ["deviceId", "correlationId", "accepted", "timestamp"],
-  "additionalProperties": true
+  "required": [],
+  "properties": { "reason": { "type": "string", "minLength": 1 } },
+  "additionalProperties": false
 }

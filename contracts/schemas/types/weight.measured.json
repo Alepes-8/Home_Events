@@ -1,23 +1,11 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "weight.measured",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "weight.measured",
   "type": "object",
+  "required": ["kg", "stable"],
   "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "value": {
-      "type": "number"
-    },
-    "unit": {
-      "type": "string",
-      "enum": ["kg", "g", "lb"]
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "kg":     { "type": "number", "minimum": 0, "maximum": 200 },
+    "stable": { "type": "boolean" }
   },
-  "required": ["deviceId", "value", "unit", "timestamp"],
-  "additionalProperties": true
+  "additionalProperties": false
 }

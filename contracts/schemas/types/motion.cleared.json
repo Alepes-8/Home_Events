@@ -1,20 +1,10 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "motion.cleared",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "motion.cleared",
   "type": "object",
+  "required": ["durationSec"],
   "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "detected": {
-      "type": "boolean",
-      "const": false
-    }
+    "durationSec": { "type": "integer", "minimum": 0 } 
   },
-  "required": ["deviceId", "timestamp", "detected"],
-  "additionalProperties": true
+  "additionalProperties": false
 }

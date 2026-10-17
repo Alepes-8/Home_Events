@@ -1,32 +1,11 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "light.set",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "light.set",
   "type": "object",
+  "required": ["on"],
   "properties": {
-    "deviceId": {
-      "type": "string"
-    },
-    "state": {
-      "type": "string",
-      "enum": ["on", "off"]
-    },
-    "brightness": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 100
-    },
-    "expiresAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "correlationId": {
-      "type": "string"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "on":         { "type": "boolean" },
+    "brightness": { "type": "integer", "minimum": 0, "maximum": 100 }
   },
-  "required": ["deviceId", "state", "timestamp"],
-  "additionalProperties": true
+  "additionalProperties": false
 }
