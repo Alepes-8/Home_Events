@@ -3,6 +3,7 @@ const path = require('path');
 const { groups, classes, types } = require('../catalog.json');
 
 const typeEntries = Object.entries(types);
+const schemasDir = path.join(__dirname, '../schemas');
 
 // "all" → groups.all, ["light"] → ["light"]
 function resolveDeviceTypes(deviceTypes) {
@@ -14,26 +15,26 @@ describe('catalog: consistency', () => {
     expect(Object.keys(classes)).toContain(entry.class);
   });
 
-  test.each(typeEntries)('%s has known deviceTypes', (name, entry) => {
+  test.each(typeEntries)('%s has known, non-empty deviceTypes', (name, entry) => {
     const resolved = resolveDeviceTypes(entry.deviceTypes);
-    expect(resolved).toBeDefined();               // unknown group name → undefined
+    expect(resolved).toBeDefined();                    // unknown group name → undefined
+    expect(resolved.length).toBeGreaterThan(0);        // [] would mean "no device can use it"
     expect(groups.all).toEqual(expect.arrayContaining(resolved));
   });
 
   test.each(Object.entries(groups))('group %s only has known device types', (name, members) => {
     expect(groups.all).toEqual(expect.arrayContaining(members));
   });
-  
+
+  test.each(typeEntries)('%s schema path follows the naming convention', (name, entry) => {
+    expect(entry.schema).toBe(`types/${name}.json`);
+  });
 });
 
 describe.skip('catalog: matches schema files', () => {   // remove .skip in step 4
-  const schemasDir = path.join(__dirname, '../schemas');
-
-  test('every catalog type has a schema file', () => {
-    const missing = typeEntries
-      .filter(([, entry]) => !fs.existsSync(path.join(schemasDir, entry.schema)))
-      .map(([name]) => name);
-    expect(missing).toEqual([]);
+  test.each(typeEntries)('%s schema file exists', (name, entry) => {
+    const fullPath = path.join(schemasDir, entry.schema);
+    expect(fs.existsSync(fullPath)).toBe(true);
   });
 
   test('every schema file has a catalog entry', () => {
@@ -43,10 +44,7 @@ describe.skip('catalog: matches schema files', () => {   // remove .skip in step
     expect(fileTypes.sort()).toEqual(Object.keys(types).sort());
   });
 
-  //TODO the foillowing code needs to test that the schema path accually matches one that exist
-  /*test.each(Object.entries(types))('%s schema path follows the naming convention', (name, entry) => {
-    expect(entry.schema).toBe(`types/${name}.json`);
-    });*/
+  test.todo('every schema file compiles with Ajv');
 });
 
 describe('catalog: design decisions', () => {
