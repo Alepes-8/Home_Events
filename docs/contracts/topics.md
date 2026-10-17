@@ -1,6 +1,30 @@
 # Topics & message contract
 
+A topic is the content included at the beginning of a message, but it is not part of the package. Something that may be a bit easier to understand by comparison is a REST API. When you call an API through a REST call, you usually need two things: the package (the message) and the address to send it to. That address is what the topic represents in the MQTT communication path. So where a REST call might be stated as `POST /api/drinks/42`, the topic would be `home/v1/device/soil-a3f2c1/telemetry`. The big difference is that the topic carries more information about who sent the message and what it contains. In this example, it states that the message uses the v1 schema version, that it was sent from the device `soil-a3f2c1` (a specific ID given to one of the soil sensors), and that it is a telemetry message, not an event message. This tells us a lot about what we can do with it and where it needs to go.
+
+
+
 Status: v1 · see ADR-002, 003, 004, 008, 009
+
+## Topics file
+
+The topic file handles the topic part of a message. Since a message is usually published with the topic on top of the JSON payload, the topic file handles that part so that services and other components don't have to build and break apart the topic by hand. These are the things the topic file needs to handle in its current state:
+
+- TopicFor: The component that allows each unit to create a topic correctly when it publishes its package. It is used by the sender and builds the address correctly every time.
+- ParseTopic: The component that allows the receiving end to handle the topic correctly. It turns the address back into its core components and rejects malformed addresses.
+
+## Topics message
+
+The topic contains information that helps the receiving end see who the message is from, along with other information that directs where the message should go. It is divided up as follows:
+
+home / v1 / device / soil-a3f2c1 / telemetry
+ │     │      │          │            └── class:   what kind of message
+ │     │      │          └── deviceId:  who it's from (or for, if it's a cmd)
+ │     │      └── section: device topics (vs system topics)
+ │     └── version of the topic scheme
+ └── root: everything in this house
+
+When comparing this with the package in contracts, you might ask why we have `deviceId` twice: once in the topic and once in the package. This is because the topic is used by the broker, so that messages can be routed correctly and so that the ACL can block a device from posting as someone else. However, the topic disappears when we want to record the message, so the package also contains the `deviceId`. That way it can stand on its own and be stored as a complete payload. Having the payload say who sent it is also helpful in its own right.
 
 ## Principles
 - Topics contain only what never changes: **version, device identity, message class**.
