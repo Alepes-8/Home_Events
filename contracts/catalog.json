@@ -1,4 +1,8 @@
 {
+  "schemaVersion": {
+    "current": 1,
+    "supported": [1]
+  },
   "groups": {
     "all":          ["button", "light", "motion", "soil", "weight"],
     "configurable": ["motion", "soil", "weight"]

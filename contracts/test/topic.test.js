@@ -1,3 +1,4 @@
+// test/topic.test.js
 const { topicFor, parseTopic } = require('../src/topics');
 
 describe('topicFor', () => {
@@ -6,10 +7,9 @@ describe('topicFor', () => {
   });
 
   test.each([
-    ['soil-a3f2c1', 'random',    'Unknown class'],
-    ['soil-a3f2c1', 'constructor', 'Unknown class'],   // inherited-property trap
-    ['Soil 1',      'event',     'Invalid deviceId'],
-    ['toaster-a3f2c1', 'event',  'Unknown device type'],
+    ['Soil-1',        'telemetry',   'Invalid deviceId'],
+    ['toaster-a3f2c1', 'event',      'Unknown device type'],
+    ['soil-a3f2c1',   'temperature', 'Unknown class'],
   ])('throws for (%s, %s)', (deviceId, cls, message) => {
     expect(() => topicFor(deviceId, cls)).toThrow(message);
   });

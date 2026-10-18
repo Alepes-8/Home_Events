@@ -1,0 +1,140 @@
+{
+    "invalid_topic": {
+        "expectedError": "unsupported topic version",
+        "topic": "home/v2/device/button-a3f2c1/event",
+        "message": { 
+            "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", "schemaVersion": 1, 
+            "deviceId": "button-a3f2c1",
+            "type": "button.pressed", 
+            "ts": 1760180400000, 
+            "seq": 2, 
+            "data": { "press": "single" } 
+        }
+    },
+    "missing_id": {
+        "expectedError": "required property 'id'",
+        "topic": "home/v1/device/button-a3f2c1/event",
+        "message": { 
+        "schemaVersion": 1, 
+        "deviceId": "button-a3f2c1",
+        "type": "button.pressed", 
+        "ts": 1760180400000, 
+        "seq": 2, 
+        "data": { "press": "single" } 
+        }
+    },
+    "incorrect_schemaVersion": {
+        "expectedError": "unsupported schemaVersion",
+        "topic": "home/v1/device/button-a3f2c1/event",
+        "message": { 
+        "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", 
+        "schemaVersion": 2, 
+        "deviceId": "button-a3f2c1",
+        "type": "button.pressed", 
+        "ts": 1760180400000, 
+        "seq": 2, 
+        "data": { "press": "single" } 
+        }
+    },
+    "invalid_type": {
+        "expectedError": "unknown type",
+        "topic": "home/v1/device/button-a3f2c1/event",
+        "message": { 
+        "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", 
+        "schemaVersion": 1, 
+        "deviceId": "button-a3f2c1",
+        "type": "none.existing", 
+        "ts": 1760180400000, 
+        "seq": 2, 
+        "data": { "press": "single" } 
+        }
+    },
+    "invalid_class_for_type": {
+        "expectedError": "belongs to class",
+        "topic": "home/v1/device/button-a3f2c1/telemetry",
+        "message": { 
+        "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", 
+        "schemaVersion": 1, 
+        "deviceId": "button-a3f2c1",
+        "type": "button.pressed", 
+        "ts": 1760180400000, 
+        "seq": 2, 
+        "data": { "press": "single" } 
+        }
+    },
+    "different_device_type_for_device": {
+        "expectedError": "may not use",
+        "topic": "home/v1/device/button-a3f2c1/event",
+        "message": { 
+            "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", 
+            "schemaVersion": 1, 
+            "deviceId": "button-a3f2c1",
+            "type": "motion.cleared", 
+            "ts": 1760180400000, 
+            "seq": 2, 
+            "data": {} 
+        }
+    },
+    "missmatch_deviceId_topic": {
+        "expectedError": "does not match topic",
+        "topic": "home/v1/device/button-a3f2c1/event",
+        "message": { 
+        "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", 
+        "schemaVersion": 1, 
+        "deviceId": "button-a00000",
+        "type": "button.pressed", 
+        "ts": 1760180400000, 
+        "seq": 2, 
+        "data": { "press": "single" } 
+        }
+    },
+    "missing_cmd_field": {
+        "expectedError": "cmd requires: expiresA",
+        "topic": "home/v1/device/light-a3f2c1/cmd",
+        "message": { 
+            "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", 
+            "schemaVersion": 1, 
+            "deviceId": "light-a3f2c1",
+            "type": "light.set", 
+            "ts": 1760180400000, 
+            "seq": 2,
+            "correlationId": "c-7f3a", 
+            "source": "rules-engine/rule-12",
+            "data": { 
+                "on": true, 
+                "brightness": 10 
+            } 
+        }
+    },
+    "event_containing_correlationId": {
+        "expectedError": "event must not have: correlationId",
+        "topic": "home/v1/device/button-a3f2c1/event",
+        "message": { 
+            "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W", 
+            "schemaVersion": 1, 
+            "deviceId": "button-a3f2c1",
+            "type": "button.pressed", 
+            "ts": 1760180400000, 
+            "seq": 2,
+            "correlationId": "c-7f3a",
+            "data": { "press": "single" } 
+        }
+    },
+    "invalid_data_value_exceeding_max": {
+        "expectedError": "/brightness",
+        "topic": "home/v1/device/light-a3f2c1/cmd",
+        "message": { 
+            "id": "01JA5K8Z3M4N6P7Q8R9S0T1V2W",
+            "schemaVersion": 1, 
+            "deviceId": "light-a3f2c1",
+            "type": "light.set", 
+            "ts": 1760180400000,
+                "seq": 2,
+            "correlationId": "c-7f3a", 
+            "source": "rules-engine/rule-12", 
+            "expiresAt": 1760180410000,
+            "data": { "on": true, "brightness": 140 } 
+        }
+    }
+}
+

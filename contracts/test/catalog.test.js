@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { groups, classes, types } = require('../catalog.json');
+const { schemaVersion, groups, classes, types } = require('../catalog.json');
 
 const typeEntries = Object.entries(types);
 const schemasDir = path.join(__dirname, '../schemas');
@@ -9,6 +9,28 @@ const schemasDir = path.join(__dirname, '../schemas');
 function resolveDeviceTypes(deviceTypes) {
   return typeof deviceTypes === 'string' ? groups[deviceTypes] : deviceTypes;
 }
+
+describe('schemaVersion', () => {
+  test('current is a positive integer', () => {
+    expect(Number.isInteger(schemaVersion.current)).toBe(true);
+    expect(schemaVersion.current).toBeGreaterThanOrEqual(1);
+  });
+
+  test('current is in supported (senders must produce accepted messages)', () => {
+    expect(schemaVersion.supported).toContain(schemaVersion.current);
+  });
+
+  test('supports at most two versions (N and N-1)', () => {
+    expect(schemaVersion.supported.length).toBeGreaterThan(0);
+    expect(schemaVersion.supported.length).toBeLessThanOrEqual(2);
+  });
+
+  test('supported versions are current and the one before it', () => {
+    schemaVersion.supported.forEach((v) => {
+      expect([schemaVersion.current, schemaVersion.current - 1]).toContain(v);
+    });
+  });
+});
 
 describe('catalog: consistency', () => {
   test.each(typeEntries)('%s has a known class', (name, entry) => {
@@ -31,7 +53,7 @@ describe('catalog: consistency', () => {
   });
 });
 
-describe.skip('catalog: matches schema files', () => {   // remove .skip in step 4
+describe('catalog: matches schema files', () => {   // remove .skip in step 4
   test.each(typeEntries)('%s schema file exists', (name, entry) => {
     const fullPath = path.join(schemasDir, entry.schema);
     expect(fs.existsSync(fullPath)).toBe(true);
@@ -44,7 +66,9 @@ describe.skip('catalog: matches schema files', () => {   // remove .skip in step
     expect(fileTypes.sort()).toEqual(Object.keys(types).sort());
   });
 
-  test.todo('every schema file compiles with Ajv');
+  test('every schema file compiles with Ajv', () => {
+    expect(() => require('../src/data')).not.toThrow();
+  });
 });
 
 describe('catalog: design decisions', () => {
